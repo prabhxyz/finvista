@@ -3,7 +3,7 @@ import stock_advice
 followed_companies = ["Samsung", "Apple", "Microsoft"]
 
 # Generate a summary prompt
-summary_prompt = "Provide investment advice for the following companies based on the given points:"
+summary_prompt = "Based on the given news, give investment advice for these companies' stocks in bullet points NOT products"
 
 # Collect stock advice for each company and add it to the prompt
 for company in followed_companies:

@@ -12,54 +12,43 @@
 # Stocks for medium risk tolerance (32-63)
 # Penny Stocks for High Risk Tolerance (64-80)
 
-def calculate_risk_tolerance(user_data):
-    risk_tolerance = 0
-    risk_tolerance += user_data['experience_investing']
-    risk_tolerance += user_data['comfort_with_risk']
-    risk_tolerance += user_data['importance_of_returns']
-    risk_tolerance += user_data['investment_horizon']
-    risk_tolerance += user_data['reaction_to_loss']
-    risk_tolerance += user_data['income_stability']
-    risk_tolerance += user_data['debt_level']
-    risk_tolerance += user_data['stress_level']
-    
-    return risk_tolerance
+def plan_investments(experience_investing, comfort_with_risk, importance_of_returns, investment_horizon, reaction_to_loss, income_stability, debt_level, stress_level):
+    def calculate_risk_tolerance():
+        risk_tolerance = 0
+        risk_tolerance += experience_investing
+        risk_tolerance += comfort_with_risk
+        risk_tolerance += importance_of_returns
+        risk_tolerance += investment_horizon
+        risk_tolerance += reaction_to_loss
+        risk_tolerance += income_stability
+        risk_tolerance += debt_level
+        risk_tolerance += stress_level
 
-# User data
-user_data = {
-    'experience_investing': 5,
-    'comfort_with_risk': 8,
-    'importance_of_returns': 7,
-    'investment_horizon': 6,
-    'reaction_to_loss': 4,
-    'income_stability': 7,
-    'debt_level': 6,
-    'stress_level': 5
-}
+        return risk_tolerance
 
-# Calculate risk tolerance
-risk_tolerance = calculate_risk_tolerance(user_data)
-print(f"Risk Tolerance: {risk_tolerance}")
+    # Calculate risk tolerance
+    risk_tolerance = calculate_risk_tolerance()
+    print(f"Risk Tolerance: {risk_tolerance}")
 
-# Determine investment type based on risk tolerance
-if risk_tolerance <= 32:
-    print("Low Risk Tolerance: Consider the following investments:")
-    print("- Government Bonds")
-    print("- Municipal Bonds")
-    print("- High-Quality Corporate Bonds")
-    print("- Certificate of Deposits (CDs)")
-    print("- Money Market Funds")
-elif risk_tolerance <= 63:
-    print("Medium Risk Tolerance: Consider the following investments:")
-    print("- Blue-chip Stocks")
-    print("- Diversified Mutual Funds")
-    print("- Exchange-Traded Funds (ETFs)")
-    print("- Real Estate Investment Trusts (REITs)")
-    print("- Dividend-Paying Stocks")
-else:
-    print("High Risk Tolerance: Consider the following investments:")
-    print("- Penny Stocks")
-    print("- Emerging Market Stocks")
-    print("- Cryptocurrency")
-    print("- Small-Cap Stocks")
-    print("- High-Yield Bonds")
+    # Determine investment type based on risk tolerance
+    if risk_tolerance <= 32:
+        print("Low Risk Tolerance: Consider the following investments:")
+        print("- Government Bonds")
+        print("- Municipal Bonds")
+        print("- High-Quality Corporate Bonds")
+        print("- Certificate of Deposits (CDs)")
+        print("- Money Market Funds")
+    elif risk_tolerance <= 63:
+        print("Medium Risk Tolerance: Consider the following investments:")
+        print("- Blue-chip Stocks")
+        print("- Diversified Mutual Funds")
+        print("- Exchange-Traded Funds (ETFs)")
+        print("- Real Estate Investment Trusts (REITs)")
+        print("- Dividend-Paying Stocks")
+    else:
+        print("High Risk Tolerance: Consider the following investments:")
+        print("- Penny Stocks")
+        print("- Emerging Market Stocks")
+        print("- Cryptocurrency")
+        print("- Small-Cap Stocks")
+        print("- High-Yield Bonds")

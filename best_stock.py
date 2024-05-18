@@ -21,7 +21,7 @@ for company in followed_companies:
     advice = stock_advice.get_stock_advice(company)
     summary_prompt += f"\n\n{company}:\n{advice}"
 
-# Print the final prompt
+# Print the final prompt    
 print(summary_prompt)
 print("-------------\n\n")
 # Get and print the final investment advice

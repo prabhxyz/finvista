@@ -2,13 +2,13 @@ import google.generativeai as genai
 from api_keys import gemini_key
 import get_latest_links
 
+def create_advice(the_prompt):
+    model = genai.GenerativeModel('gemini-1.0-pro-latest')
+    response = model.generate_content(the_prompt)
+    return response.text
+
 def get_stock_advice(company):
     genai.configure(api_key = gemini_key)
-
-    def create_advice(the_prompt):
-        model = genai.GenerativeModel('gemini-1.0-pro-latest')
-        response = model.generate_content(the_prompt)
-        return response.text
 
     latest_news_links = get_latest_links.get_latest_news_links(company)[:10]
 

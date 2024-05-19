@@ -2,3 +2,4 @@
 /api_keys.py
 /.idea/
 __pycache__
+.env.local

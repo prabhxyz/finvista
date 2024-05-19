@@ -8,7 +8,8 @@ def create_advice(the_prompt):
     return response.text
 
 def get_stock_advice(company):
-    genai.configure(api_key = gemini_key)
+    api = os.environ.get('API_KEY')
+    genai.configure(api_key = api) 
 
     latest_news_links = get_latest_links.get_latest_news_links(company)[:10]
 

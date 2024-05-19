@@ -136,9 +136,9 @@ const Investing = () => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="flex-1 flex-grow w-full h-full overflow-y-scroll gap-10 fc py-12 justify-start items-start"
+						className="flex-1 flex-grow w-full h-full overflow-y-scroll gap-10 fc py-12 justify-start items-start max-w-4xl mx-auto"
 					>
-						<h1 className="text-2xl">Here's what the Genie recommended for you</h1>
+						<h1 className="text-2xl font-bold">Here's what the Genie recommended for you</h1>
 						{response.recc?.map((item) => (
 							<motion.div
 								initial={{ opacity: 0 }}
@@ -148,7 +148,7 @@ const Investing = () => {
 							>
 								<div className="fc gap-3 justify-center items-start">
 									<div className="fr gap-2">
-										<h2 className="text-md mtext-2xl font-bold">{item.company}</h2>
+										<h2 className="text-4xl font-bold">{item.company}</h2>
 										<Chip
 											color={item.recommendation === 'Buy' ? 'primary' : item.recommendation === 'Hold' ? 'warning' : 'error'}
 											label={item.recommendation}
@@ -156,7 +156,10 @@ const Investing = () => {
 										/>
 									</div>
 								</div>
-								<div className="flex gap-2">
+								<div className="fc items-start justify-start gap-2">
+									<p className="font-bold">
+										{item.recommendation === 'Buy' ? 'Why Buy?' : item.recommendation === 'Hold' ? 'Why Hold?' : 'Why Sell?'}
+									</p>
 									<p>{item.reason}</p>
 								</div>
 								<div className="fc w-full">

@@ -12,14 +12,13 @@ def hello_world():
 # post
 @app.get("/beststock")
 def best_stock_res():
-    if request.method == 'POST':
-        # request.body has list of companies
-        print('hello beta')
-        companies = request.json
-        print(*companies)
-        res = best_stock_advice(*companies)
-        
-        return jsonify({"recc": res})
+    companies = request.args.get('companies') 
+    # split the companies by comma
+    companies = companies.split(',')
+    print('hello beta')
+    res = best_stock_advice(*companies)
+    
+    return jsonify({"recc": res})
     
 
 

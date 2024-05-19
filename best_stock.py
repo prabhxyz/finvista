@@ -10,7 +10,7 @@ def best_stock_advice(*followed_companies):
     3. Use the exact format below for each company:
     
     Company Name:
-    (Buy/Sell/Hold): Reasoning for the advice.
+    (Buy/Sell/Hold): Reasoning for the advice. Do not include any additional text or formatting outside the specified structure. Just Buy, Sell, or Hold.
     
     Ensure the output includes nothing more or less than specified. Only bold the Company Name. Do not add any additional text or formatting outside the specified structure.
     """

@@ -16,9 +16,9 @@ def best_stock_res():
     # split the companies by comma
     companies = companies.split(',')
     print('hello beta')
-    res = best_stock_advice(*companies)
+    companiesInfo, links = best_stock_advice(*companies)
     
-    return jsonify({"recc": res})
+    return jsonify({"recc": companiesInfo, "links": links})
     
 
 

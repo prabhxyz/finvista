@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+body {
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+@layer base {
+	.fc {
+		@apply flex flex-col items-center justify-center;
+	}
+	.fr {
+		@apply flex flex-row items-center justify-center;
+	}
+}
+
+.nav-item {
+	@apply w-full px-5 mx-2 py-3 hover:bg-white/20 rounded-2xl transition-colors cursor-pointer;
+}
+
+.card-item {
+	@apply px-5 py-3 bg-zinc-800 border border-zinc-400/50 rounded-2xl;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+	width: 40px;
+	aspect-ratio: 1;
+	--c: linear-gradient(#000 0 0);
+	--r1: radial-gradient(farthest-side at bottom, #000 93%, #0000);
+	--r2: radial-gradient(farthest-side at top, #000 93%, #0000);
+	background: var(--c), var(--r1), var(--r2), var(--c), var(--r1), var(--r2), var(--c), var(--r1), var(--r2);
+	background-repeat: no-repeat;
+	animation: l2 1s infinite alternate;
+}
+@keyframes l2 {
+	0%,
+	25% {
+		background-size: 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+		background-position: 0 50%, 0 calc(50% - 2px), 0 calc(50% + 2px), 50% 50%, 50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%,
+			100% calc(50% - 2px), 100% calc(50% + 2px);
+	}
+	50% {
+		background-size: 8px 100%, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+		background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%,
+			100% calc(50% - 2px), 100% calc(50% + 2px);
+	}
+	75% {
+		background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+		background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%,
+			100% calc(50% - 2px), 100% calc(50% + 2px);
+	}
+	95%,
+	100% {
+		background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px;
+		background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%,
+			100% calc(0% - 2px), 100% calc(100% + 2px);
+	}
+}

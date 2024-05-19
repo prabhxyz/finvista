@@ -8,3 +8,4 @@ Requests
 scikit_learn
 tensorflow
 yfinance
+google-generativeai

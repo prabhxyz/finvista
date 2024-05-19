@@ -14,10 +14,11 @@ def best_stock_advice(*followed_companies):
     
     Ensure the output includes nothing more or less than specified. Only bold the Company Name. Do not add any additional text or formatting outside the specified structure.
     """
-
+    links_data = {}
     # Collect stock advice for each company and add it to the prompt
     for company in followed_companies:
-        advice = stock_advice.get_stock_advice(company)
+        advice, top_links = stock_advice.get_stock_advice(company)
+        links_data[company] = top_links
         summary_prompt += f"\n\n{company}:\n{advice}"
 
     # Print the final prompt
@@ -32,4 +33,4 @@ def best_stock_advice(*followed_companies):
     print("-------------\n\n")
     companies_info = info_extractor.extract_information(answer)
     print(companies_info)
-    return companies_info
+    return companies_info, links_data

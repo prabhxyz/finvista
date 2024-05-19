@@ -21,7 +21,7 @@ def stock_price_prediction_to_json(company):
 
         for x in range(prediction_days, len(scaled_data) - 1):
             x_train.append(scaled_data[x - prediction_days:x, 0])
-            y_train.append(scaled_data[x + 1, 0])  # Predict the next day's price
+            y_train.append(scaled_data[x, 0])  # Predict the next day's price
 
         x_train, y_train = np.array(x_train), np.array(y_train)
         x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
@@ -44,21 +44,24 @@ def stock_price_prediction_to_json(company):
         data = data.values.reshape(-1, 1)
         scaled_data = scaler.transform(data)
 
-        x_test = []
-
-        for x in range(prediction_days, len(scaled_data) - 1):
-            x_test.append(scaled_data[x - prediction_days:x, 0])
+        x_test = [scaled_data[-prediction_days:]]
 
         x_test = np.array(x_test)
         x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
-        predicted_prices = model.predict(x_test)
+        predicted_prices = []
+        for _ in range(3):  # Predict the next 3 days
+            pred_price = model.predict(x_test)
+            predicted_prices.append(pred_price[0, 0])
+            x_test = np.append(x_test[:, 1:, :], [[pred_price]], axis=1)
+
+        predicted_prices = np.array(predicted_prices).reshape(-1, 1)
         predicted_prices = scaler.inverse_transform(predicted_prices)
 
-        return predicted_prices
+        return predicted_prices.flatten()
 
-    start = datetime.datetime(2000, 1, 1)
-    end = datetime.datetime(2020, 1, 1)
+    end = datetime.datetime.now()
+    start = end - datetime.timedelta(days=5*365)
 
     data = load_data(company, start, end)
     prediction_days = 3
@@ -67,21 +70,24 @@ def stock_price_prediction_to_json(company):
     model = build_model((x_train.shape[1], 1))
     model.fit(x_train, y_train, epochs=2, batch_size=32)
 
-    test_start = datetime.datetime(2020, 1, 1)
-    test_end = datetime.datetime.now()
-    test_data = load_data(company, test_start, test_end)
-    actual_prices = test_data['Close'].values
-    predicted_prices = predict_future(model, test_data['Close'], scaler, prediction_days)
+    predicted_prices = predict_future(model, data['Close'], scaler, prediction_days)
 
-    actual_prices = actual_prices[-len(predicted_prices):]
+    future_dates = [end + datetime.timedelta(days=i) for i in range(1, 4)]
     df = pd.DataFrame({
-        'Actual Prices': actual_prices,
-        'Predicted Prices': predicted_prices.flatten()
+        'Date': future_dates,
+        'Predicted Prices': predicted_prices
     })
 
-    json_data = df.to_json(orient='records')
-    return json_data
+    # Convert DataFrame to a list of dictionaries
+    json_records = df.to_dict(orient='records')
 
-# Example usage:
-json_data = stock_price_prediction_to_json('AAPL')
-print(json_data)
+    # Adding metadata for better JSON structure
+    result = {
+        "company": company,
+        "prediction_days": prediction_days,
+        "data": json_records
+    }
+
+    # Convert the result to a JSON string with indentation
+    json_data = json.dumps(result, indent=4, default=str)
+    return json_data

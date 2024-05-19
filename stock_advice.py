@@ -14,11 +14,12 @@ def get_stock_advice(company):
 
     prompt = f"Can you summarize only the links below in a few bullet points? ONLY use the information in the links."
 
+    top_links = []
+
     for idx, link in enumerate(latest_news_links, start=1):
         print(f"{idx}. {link}")
+        top_links.append(link)
         prompt += "\n" + f"{idx}. {link}"
 
     print("------------------")
-    return create_advice(prompt)
-
-print(get_stock_advice("Samsung"))
+    return create_advice(prompt), top_links[:10]

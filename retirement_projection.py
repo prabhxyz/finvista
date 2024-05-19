@@ -1,12 +1,12 @@
-def calculate_retirement_savings():
+def calculate_retirement_savings(retirement_age, current_age, income, percentage_saved, retirement_savings, life_expectancy):
     # User data
     user_data = {
-        'retirement_age': 65,
-        'current_age': 30,
-        'income': 100000,
-        'percentage_saved': 0.10,
-        'retirement_savings': 50000,
-        'life_expectancy': 85
+        'retirement_age': retirement_age,
+        'current_age': current_age,
+        'income': income,
+        'percentage_saved': percentage_saved,
+        'retirement_savings': retirement_savings,
+        'life_expectancy': life_expectancy
     }
 
     def calculate_retirement_savings(user_data):
